@@ -22,5 +22,7 @@ namespace JobFinder.Models
         // ao inves de procurar a empresa pelo CompanyId, vai já direto pela tabela company
         // estudar melhor essa propriedade de navegação
 
+        public ICollection<JobTechnology> JobTechnologies { get; set; } = new List<JobTechnology>();
+
     }
 }
