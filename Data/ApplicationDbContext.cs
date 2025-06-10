@@ -18,6 +18,12 @@ namespace JobFinder.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Company>()
+                .HasMany(c => c.Jobs)
+                .WithOne(c => c.Company)
+                .HasForeignKey(c => c.CompanyId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<JobTechnology>(entity =>
             {
                 entity.HasKey(jt => new {jt.JobId, jt.TechnologyId});
@@ -27,10 +33,11 @@ namespace JobFinder.Data
                 .HasForeignKey(jt => jt.JobId);
             });
 
+
+
             modelBuilder.Entity<Job>()
                 .Property(j => j.JobType)
                 .HasConversion<string>();
-
         }
 
 
